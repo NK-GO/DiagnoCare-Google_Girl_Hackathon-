@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+    <style>
+        body {
+            background-image: url('/static/1330529.png'); /* Path to your background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.7); /* Transparent white background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #1d1c1bbe; /* Tomato color */
+            text-align: center;
+            font-size: 35px; /* Increase font size */
+            text-transform: uppercase; /* Convert to uppercase */
+        }
+
+        p {
+            color: #b44646; /* Steel blue color */
+            font-size: 30px; /* Increase font size */
+        }
+
+        .retry-button {
+            background-color: #4682b4; /* Steel blue color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <p>Predicted Label: {{ predicted_label }}</p>
+        <form action="/" method="get">
+            <button type="submit" class="retry-button">Retry</button>
+        </form>
+    </div>
+</body>
+</html>

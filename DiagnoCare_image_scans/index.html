@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TEAM DECK</title>
+    <title>Medical Image Classification</title>
+    <style>
+        body {
+            background-image: url('/static/1330529.png'); /* Background image path */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.5); /* Transparent white background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #0c0c0cb6; /* Tomato color */
+            text-align: center;
+            font-size: 32px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="file"],
+        input[type="submit"] {
+            display: none;
+        }
+
+        label.custom-file-upload,
+        label.custom-submit-button {
+            background-color: #4682b4; /* Steel blue color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Medical Image Classification</h1>
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <label for="file-upload" class="custom-file-upload">Choose Medical image</label>
+            <input id="file-upload" type="file" name="file" accept=".png, .jpg, .jpeg">
+            <label for="submit-button" class="custom-submit-button">Upload & Predict</label>
+            <input id="submit-button" type="submit" value="Upload & Predict">
+        </form>
+    </div>
+</body>
+</html>
