@@ -25,6 +25,8 @@ DiagnoCare AI is a comprehensive healthcare solution developed for the Google Gi
 - Offline processing capabilities
 
 the image prediction model looks like this
+![alt text](image-1.png)
+![alt text](image-2.png)
 
 
 ## 🔧 Technical Architecture
