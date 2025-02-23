@@ -27,7 +27,7 @@ This advanced medical imaging scanner utilizes artificial intelligence to enhanc
 ### Scalability & Performance
 - 📈 The system efficiently processes over 5,000 images daily without any slowdowns, enabling batch processing for multiple scans simultaneously.
 
-### the image prediction model looks like this:
+### The image prediction model looks like this
 
 ![alt text](image-1.png)
 
@@ -60,11 +60,22 @@ A multilingual, high-performance healthcare assistant utilizing OpenAI's languag
 ### Cuurent look of Chat Bot To be improved further 
 ![alt text](image-3.png)
 
+## Models Used
+
+- 🤖 Utilizing the <b>POE Chatbot API </b> , this model employs <b>OpenAI's advanced "Chinchilla" (ChatGPT) </b> or "Beaver" (GPT-4) for handling medical inquiries. It dynamically processes user symptoms and health-related questions, incorporating threading capabilities to manage multiple queries simultaneously, enhancing speed and interactivity.
+- 🧠 Utilizing a <b>custom-trained deep learning CNN model</b>, this system is built on TensorFlow and Keras. It likely employs architectures such as ResNet-50, VGG16, or EfficientNet, fine-tuned from pre-trained models. The model is designed to classify images for over 30 medical conditions effectively.
+
+## Tech Stack 
+- ✅ Programming Language: Python
+- ✅ Framework: PyQt5 (for GUI-based chatbot interface) , TensorFlow/Keras (for image classification)
+- ✅ Backend: Flask 
+- ✅ API Used: Poe API (for querying AI models)
+
+![Tech stack](image-4.png)
 
 
 ## 🔧 Performance Metrics
-
-
+![performance metrics ](image-5.png)
 
 
 ## 💻 Installation
