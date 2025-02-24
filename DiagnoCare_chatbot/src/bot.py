@@ -3,11 +3,9 @@ import poe
 import threading
 import time
 
-# Initialize client with environment token
 client = poe.Client(os.getenv("POE_TOKEN"))
 model_name = "chinchilla"
 
-# Define color constants for console output
 class ColorCodes:
     HEADER = '\033[95m'
     BLUE = '\033[94m'
@@ -19,7 +17,6 @@ class ColorCodes:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-# Class to represent user queries
 class UserInput:
     def __init__(self, message="Hello"):
         self.message = message
@@ -41,7 +38,6 @@ class UserInput:
     def get_summary(self):
         return self.summary
 
-# Class to handle chatbot responses
 class BotResponse:
     def __init__(self, query=UserInput()):
         self.query = query
