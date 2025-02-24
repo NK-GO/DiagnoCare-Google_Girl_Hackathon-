@@ -82,19 +82,11 @@ A multilingual, high-performance healthcare assistant utilizing OpenAI's languag
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/healthguard-ai.git
-
-# Navigate to project directory
-cd healthguard-ai
+git clone https://github.com/Samriddhi2711/Google_Girl_Hackathon_Project.git
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Set up environment variables
-cp .env.example .env
-
-# Run the application
-python app.py
 ```
 
 ## 🚀 Quick Start Guide
