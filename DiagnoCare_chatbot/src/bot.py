@@ -1,121 +1,101 @@
-#########
-#!/bin/env/python3
-
 import os
 import poe
 import threading
 import time
-import logging
 
+# Initialize client with environment token
 client = poe.Client(os.getenv("POE_TOKEN"))
+model_name = "chinchilla"
 
-# poe.logger.setLevel(logging.INFO)
+# Define color constants for console output
+class ColorCodes:
+    HEADER = '\033[95m'
+    BLUE = '\033[94m'
+    CYAN = '\033[96m'
+    GREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    END = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
-# Uncomment this for production only - Note: only one message per day is allowed for GPT-4
-# model = "beaver" # GPT-4
-model = "chinchilla"  # ChatGPT
+# Class to represent user queries
+class UserInput:
+    def __init__(self, message="Hello"):
+        self.message = message
+        self.summary = message
+        self.info = {}
 
-class bcolors:
-	HEADER = '\033[95m'
-	OKBLUE = '\033[94m'
-	OKCYAN = '\033[96m'
-	OKGREEN = '\033[92m'
-	WARNING = '\033[93m'
-	FAIL = '\033[91m'
-	ENDC = '\033[0m'
-	BOLD = '\033[1m'
-	UNDERLINE = '\033[4m'
+    def update_input(self, message):
+        self.message = message
+        self.summary = message
+        return self.message
 
+    def add_info(self, key, value):
+        self.info[key] = f"{key.capitalize()}: {value}"
 
-class Query:
-	def __init__(self, message="who are you ?"):
-	    	self.message = message
-	    	self.description = message
-	    	self.params = {}
-	
-	def set_message(self, message):
-		self.message = message
-		self.description = message
-		return self.message
-	
-	def set_param(self, key, value):
-		text = f"My {key} is: {value}"
-		self.params[key] = text
-	
-	def create_message(self):
-		text = []
-		for value in self.params.values():
-			text.append(value)
-		text.append(self.message)
-		self.message = ", ".join(text) + '\n'
-		return self
-	
-	def get_message(self):
-		return self.description
+    def format_input(self):
+        self.message = ", ".join(self.info.values()) + ', ' + self.message + '\n'
+        return self
 
+    def get_summary(self):
+        return self.summary
 
-class Reply:
-	def __init__(self, query=Query()):
-		self.query = query
-		self.response = None
-		self.thread_count = 0
-	
-	def send(self, interactive=False):
-		self.response = client.send_message(model, self.query.message, with_chat_break=False)
-		print(f"{bcolors.OKCYAN}Prompt >> {bcolors.ENDC}", self.query.get_message())
-		if interactive:
-			for i in self.response:
-				print(i["text_new"], end="", flush=True)
-		else:
-			for i in self.response:
-				pass
-			print(i["text"])
-		print()
-		return (i["text"])
-	
-	def message_thread(self, desc, prompt, counter):
-		for i in client.send_message(model, prompt, with_chat_break=True):
-			pass
-		print(f"{bcolors.OKCYAN}Prompt >> {bcolors.ENDC}", end="")
-		print(desc + "\n" + i["text"] + "\n" + "-" * 100 + "\n")
-		self.thread_count -= 1
-	
-	def send_multiple(self, *queries):
-		for query in queries:
-			t = threading.Thread(target=self.message_thread, args=(query.get_message(),
-						query.message, self.thread_count), daemon=True)
-			t.start()
-			self.thread_count += 1
-		
-		while self.thread_count:
-			time.sleep(0.1)
-		
-		print()
-		self.purge()
-	
-	def purge(self):
-		client.purge_conversation(model)
+# Class to handle chatbot responses
+class BotResponse:
+    def __init__(self, query=UserInput()):
+        self.query = query
+        self.response = None
+        self.active_threads = 0
 
+    def generate_answer(self, interactive=False):
+        self.response = client.send_message(model_name, self.query.message, with_chat_break=False)
+        print(f"{ColorCodes.OKCYAN}Prompt >> {ColorCodes.END}", self.query.get_summary())
+
+        if interactive:
+            for msg in self.response:
+                print(msg["text_new"], end="", flush=True)
+        else:
+            for msg in self.response:
+                pass
+            print(msg["text"])
+        print()
+        return msg["text"]
+
+    def threaded_answer(self, description, prompt, counter):
+        for msg in client.send_message(model_name, prompt, with_chat_break=True):
+            pass
+        print(f"{ColorCodes.OKCYAN}Prompt >> {ColorCodes.END}", end="")
+        print(description + "\n" + msg["text"] + "\n" + "-" * 100 + "\n")
+        self.active_threads -= 1
+
+    def handle_multiple_inputs(self, *queries):
+        for query in queries:
+            thread = threading.Thread(target=self.threaded_answer, args=(query.get_summary(),
+                        query.message, self.active_threads), daemon=True)
+            thread.start()
+            self.active_threads += 1
+        
+        while self.active_threads:
+            time.sleep(0.1)
+        
+        print()
+        self.clear_history()
+
+    def clear_history(self):
+        client.purge_conversation(model_name)
 
 if __name__ == "__main__":
-	##############
-	# Test Cases #
-	##############
-	
-	# Query will build the message
-	text = "I have headache and some pain on my neck"
-	ki2kid = Query(text)
-	ki2kid.set_param("age", 22)
-	ki2kid.set_param("gender", "male")
-	
-	text2 = "I can't see clearly"
-	mano = Query(text2)
-	mano.set_param("age", 15)
-	mano.set_param("gender", "male")
-	
-	# Create the message
-	ki2kid.create_message()
-	# Reply takes a Query and return a response
-	answer = Reply(ki2kid)
-	rep = answer.send(interactive=True)
-	print(rep)
+    input1 = UserInput("I have a headache and neck pain")
+    input1.add_info("age", 22)
+    input1.add_info("gender", "male")
+
+    input2 = UserInput("I have vision problems")
+    input2.add_info("age", 15)
+    input2.add_info("gender", "male")
+
+    input1.format_input()
+    response = BotResponse(input1)
+    answer_text = response.generate_answer(interactive=True)
+    print(answer_text)
+

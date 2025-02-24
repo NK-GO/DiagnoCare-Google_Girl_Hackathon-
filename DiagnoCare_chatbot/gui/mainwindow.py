@@ -11,7 +11,6 @@ class MyHealthCareBot(QMainWindow):
 		self.setWindowTitle('AI-Powered HealthCare Chatbot')
 		self.setGeometry(100, 100, 600, 400)
 		
-		# Create widgets
 		self.label = QLabel('Enter patient description:')
 		self.submit_button = QPushButton('Submit')
 		self.output_label = QLabel()
@@ -42,12 +41,10 @@ class MyHealthCareBot(QMainWindow):
 		        background-color: #0056b3; /* set background color on hover */
 		    }
 		''')		
-		# Create menu bar
 		menu_bar = self.menuBar()
 		options_menu = menu_bar.addMenu('Options')
 		history_menu = menu_bar.addMenu('History')
 
-		# Create actions for menu bar
 		set_age_action = QAction('Set Age', self)
 		set_age_action.triggered.connect(self.show_set_age_dialog)
 		options_menu.addAction(set_age_action)
@@ -64,11 +61,9 @@ class MyHealthCareBot(QMainWindow):
 		remove_history_action.triggered.connect(self.remove_history)
 		history_menu.addAction(remove_history_action)
 
-		# Create status bar
 		self.status_bar = QStatusBar()
 		self.setStatusBar(self.status_bar)
 
-		# Create layout
 		layout = QVBoxLayout()
 		layout.addWidget(self.label)
 		layout.addWidget(self.input_text)
@@ -78,16 +73,12 @@ class MyHealthCareBot(QMainWindow):
 		scroll_area.setWidget(self.output_label)
 		layout.addWidget(scroll_area)
 
-		# Create central widget
 		central_widget = QWidget()
 		central_widget.setLayout(layout)
-		# Set central widget
 		self.setCentralWidget(central_widget)
 
-		# Set layout for the window
 		self.setLayout(layout)
 		
-		# Connect button click event to slot
 		self.submit_button.clicked.connect(self.process_input)
 
 	def show_set_age_dialog(self):
@@ -113,14 +104,10 @@ class MyHealthCareBot(QMainWindow):
 		# self.output_label.setText(Reply(self.query).delete_history())
 
 	def process_input(self):
-		# Get user input from the input_text QLineEdit
 		user_input = self.input_text.text()
 
-		# update query message
 		self.query.set_message(user_input)
 
-		# chatbot's logic goes here
 		bot_output = Reply(self.query.create_message()).send(True)
 
-		# Update the output_label QLabel with the bot's output
 		self.output_label.setText(bot_output)
