@@ -3,9 +3,13 @@
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.0%2B-orange)
 
+## LOGO 
+![alt text](image-6.png)
+
 ## 🌟 Project Overview
 
 DiagnoCare AI is an innovative healthcare platform created for the Google Girls Hackathon. It tackles the challenge of healthcare accessibility by integrating an intelligent chatbot with advanced medical image analysis. Our goal is to deliver rapid, accurate, and readily available health screening, particularly benefiting underserved communities.
+
 
 ## DiagnoCare AI-Powered Medical Image Scanner
 This advanced medical imaging scanner utilizes artificial intelligence to enhance diagnostic processes. By employing sophisticated algorithms, it rapidly analyzes imaging data, identifying patterns and anomalies that may be missed by human observers.
