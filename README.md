@@ -89,27 +89,6 @@ pip install -r requirements.txt
 
 ```
 
-## 🚀 Quick Start Guide
+</br>
 
-1. **Healthcare Chatbot:**
-   ```python
-   from healthguard.chatbot import HealthBot
-   
-   bot = HealthBot()
-   response = bot.get_health_advice("I have a persistent cough and fever")
-   ```
-
-2. **Image Diagnosis:**
-   ```python
-   from healthguard.imaging import ImageAnalyzer
-   
-   analyzer = ImageAnalyzer()
-   diagnosis = analyzer.analyze_image("patient_xray.jpg")
-   ```
-
-
-
-
-
-
-Built with dedication for the <b>Google Girls Hackathon 2025</b>
+Built with dedication 🔥for the <b>Google Girls Hackathon 2025</b>
