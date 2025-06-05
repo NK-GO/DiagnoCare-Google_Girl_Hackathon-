@@ -85,7 +85,7 @@ A multilingual, high-performance healthcare assistant utilizing OpenAI's languag
 
 ```bash
 # Clone the repository
-git clone https://github.com/Samriddhi2711/Google_Girl_Hackathon_Project.git
+git clone https://github.com/NK-GO/Google_Girl_Hackathon_Project.git
 
 # Install dependencies
 pip install -r requirements.txt
