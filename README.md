@@ -94,4 +94,4 @@ pip install -r requirements.txt
 
 </br>
 
-Built with dedication 🔥for the <b>Google Girls Hackathon 2025</b>
+Built with dedication 🔥for the <b>Google Hackathon 2025</b>
